@@ -106,6 +106,11 @@ int main()
     int rows, cols;
     printf("enter the size of grid(K x K): \n");
     scanf("%d %d",&rows,&cols);
+
+    if(rows!=cols){
+        printf("Board must be a square , exiting the program......");
+        return 0;
+    }
     char arr[rows][cols];
 
     int count_moves = 0 ;
@@ -132,7 +137,7 @@ int main()
 
             printf("\n");
             // check for out of bound arr
-            if(i<0 ||i>rows || j<0 || j>cols){
+            if(i<0 ||i>=rows || j<0 || j>=cols){
                 printf("wrong_input , try again: \n");
             }
             else if (arr[i][j] == '_')
@@ -197,7 +202,7 @@ int main()
             scanf(" %d %d", &k, &m);
          
             
-            if(k<0 || m>rows || k<0 || m>cols){
+            if(k<0 || k>=rows || m<0 || m>=cols){
                 printf("wrong_input , try again: \n");
             }
 
