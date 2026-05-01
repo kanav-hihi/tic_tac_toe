@@ -127,19 +127,19 @@ int main()
         {  //player 1 turn
             printf("Player1: ");
             int i, j;
-            printf("enter your move : like 0 0 for first spot , %d %d for last spot\n",rows-1,rows-1);
+            printf("enter your move : like 0 0 for first spot , %d %d for last spot\n",rows-1,cols-1);
             scanf("%d %d", &i, &j);
 
             printf("\n");
             // check for out of bound arr
-            if(i<0 && i>rows && j<0 && j>cols){
+            if(i<0 ||i>rows || j<0 || j>cols){
                 printf("wrong_input , try again: \n");
             }
             else if (arr[i][j] == '_')
             {
                 printf("Valid Move! \n");
                 arr[i][j] = 'X';
-                count_moves=0;
+                count_moves++;
                 break;
             }
             else
@@ -197,7 +197,7 @@ int main()
             scanf(" %d %d", &k, &m);
          
             
-            if(k<0 && m>rows && m<0 && m>cols){
+            if(k<0 || m>rows || k<0 || m>cols){
                 printf("wrong_input , try again: \n");
             }
 
@@ -205,7 +205,7 @@ int main()
             {
                 printf("Valid Move! \n");
                 arr[k][m] = 'O';
-                count_moves=0;
+                count_moves++;
                 break;
             }
             else
