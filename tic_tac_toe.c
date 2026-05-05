@@ -102,7 +102,13 @@ int check_both_diag(int rows,int cols,char arr[rows][cols],char move){
 
 
 int main()
-{
+{   int p1_score = 0, p2_score = 0, draw_score = 0;
+    FILE *fp = fopen("score.txt", "r");
+
+    if (fp != NULL) {
+     fscanf(fp, "P1: %d\nP2: %d\nDraw: %d", &p1_score, &p2_score, &draw_score);
+     fclose(fp);
+}
     int rows, cols;
     printf("enter the size of grid(K x K): \n");
     scanf("%d %d",&rows,&cols);
@@ -173,7 +179,7 @@ int main()
         
 
          if (row_col_1 || diagonals_1)
-        {   
+        {       p1_score++;
              printf("--------------------------");
             printf("\nplayer 1 ('X') wins ");
 
@@ -184,8 +190,8 @@ int main()
 
         // check tie
         if(count_moves==(rows*cols)){
-
-            printf("\n  match ties bitch!!");
+            draw_score++;
+            printf("\n  match ties !!!");
             break;
         }
 
@@ -237,7 +243,7 @@ int main()
         int diagonals_2= check_both_diag(rows,cols,arr,'O');
 
         if (row_col_2 || diagonals_2)
-        {
+        {      p2_score++;
             printf("--------------------------");
             printf("\nplayer 2 ('O') wins ");
 
@@ -247,12 +253,28 @@ int main()
 
 
           if(count_moves==(rows*cols)){   // check tie 
-
-            printf("\n  match ties bitch !!");
+            draw_score++;
+            printf("\n  match ties....!!");
             break;
         }
     }
 
-    
+
+    fp = fopen("score.txt", "w");
+
+if (fp == NULL) {
+    printf("Error writing file!\n");
+    return 1;
+}
+printf("\n--- Scoreboard ---\n");
+printf("Player 1 (X): %d\n", p1_score);
+printf("Player 2 (O): %d\n", p2_score);
+printf("Draws: %d\n", draw_score);
+
+fprintf(fp, "P1: %d\n", p1_score);
+fprintf(fp, "P2: %d\n", p2_score);
+fprintf(fp, "Draw: %d\n", draw_score);
+
+fclose(fp);
     return 0;
 }
